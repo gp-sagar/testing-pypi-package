@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "maisagarhoo"
-version = "0.1.2"
+version = "0.2.0"
 description = "A sample package"
 authors = [{ name = "Sagar Singh", email = "sagarsingh802183@gmail.com" }]
 readme = "README.md"
