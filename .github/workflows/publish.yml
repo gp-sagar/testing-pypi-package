@@ -18,19 +18,22 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install dependencies
+      - name: Create Virtual Environment and Install Dependencies
         run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          uv venv
-          source .venv/bin/activate
-          python -m uv pip install --upgrade pip
-          uv pip install build twine
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install build twine
 
-      - name: Build package
-        run: python -m build
+      - name: Build Package
+        run: |
+          source venv/bin/activate
+          python -m build
 
       - name: Publish to PyPI
         env:
           TWINE_USERNAME: "PYPI_API_TOKEN"
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: twine upload dist/*
+        run: |
+          source venv/bin/activate
+          twine upload dist/*
